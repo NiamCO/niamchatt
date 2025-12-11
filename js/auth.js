@@ -53,30 +53,86 @@ class AuthManager {
         }
     }
     
-    async createUser() {
-        const role = this.username.toLowerCase() === 'main413h' ? 'owner' : 'user';
-        
-        const { data, error } = await this.supabase
+   async createUser() {
+    const role = this.username.toLowerCase() === 'main413h' ? 'owner' : 'user';
+    
+    try {
+        // First try to update existing user
+        const { data: existingUser, error: fetchError } = await this.supabase
             .from('users')
-            .insert([
-                {
-                    username: this.username,
-                    display_name: this.getDisplayName(this.username),
-                    role: role,
+            .select('*')
+            .eq('username', this.username)
+            .maybeSingle();
+        
+        if (existingUser) {
+            // User exists, update it
+            const { data, error } = await this.supabase
+                .from('users')
+                .update({
                     online: true,
                     typing: false,
-                    last_seen: new Date().toISOString()
+                    last_seen: new Date().toISOString(),
+                    role: role // Update role if changed
+                })
+                .eq('id', existingUser.id)
+                .select()
+                .single();
+            
+            if (error) throw error;
+            return data;
+        } else {
+            // Create new user
+            const { data, error } = await this.supabase
+                .from('users')
+                .insert([
+                    {
+                        username: this.username,
+                        display_name: this.getDisplayName(this.username),
+                        role: role,
+                        online: true,
+                        typing: false,
+                        last_seen: new Date().toISOString()
+                    }
+                ])
+                .select()
+                .single();
+            
+            if (error) {
+                // If duplicate, try to fetch the existing user
+                if (error.code === '23505') { // Unique violation
+                    const { data: existing } = await this.supabase
+                        .from('users')
+                        .select('*')
+                        .eq('username', this.username)
+                        .single();
+                    
+                    if (existing) {
+                        // Update the existing user
+                        const { data: updated } = await this.supabase
+                            .from('users')
+                            .update({
+                                online: true,
+                                typing: false,
+                                last_seen: new Date().toISOString()
+                            })
+                            .eq('id', existing.id)
+                            .select()
+                            .single();
+                        
+                        return updated;
+                    }
                 }
-            ])
-            .select()
-            .single();
-        
-        if (error) {
-            throw new Error(`Failed to create user: ${error.message}`);
+                throw error;
+            }
+            
+            return data;
         }
         
-        return data;
+    } catch (error) {
+        console.error('Error in createUser:', error);
+        throw new Error(`Failed to create/update user: ${error.message}`);
     }
+}
     
     async updateUser(userId) {
         const { data, error } = await this.supabase
