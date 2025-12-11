@@ -3,46 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NiamChat - Chat Room</title>
+    <title>NiamChat</title>
     <link rel="stylesheet" href="css/styles.css">
+      <link rel="icon" type="image/png" href="https://niamco.github.io/niamchatNOTWORKING/favicon.png">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- Theme Picker -->
     <div class="theme-picker" id="themePicker">
         <button class="theme-toggle-btn" id="themeToggleBtn">
-            <div class="theme-icon">${getIcon('themePicker')}</div>
+            <div class="theme-icon" id="themeIcon"></div>
         </button>
         <div class="theme-grid" id="themeGrid">
             <div class="theme-option theme-seaside active" data-theme="seaside">
-                <div class="theme-icon-small">${getIcon('themeSeaside')}</div>
+                <div class="theme-icon-small" id="themeSeasideIcon"></div>
             </div>
             <div class="theme-option theme-cozy" data-theme="cozy">
-                <div class="theme-icon-small">${getIcon('themeCozy')}</div>
+                <div class="theme-icon-small" id="themeCozyIcon"></div>
             </div>
             <div class="theme-option theme-neon" data-theme="neon">
-                <div class="theme-icon-small">${getIcon('themeNeon')}</div>
+                <div class="theme-icon-small" id="themeNeonIcon"></div>
             </div>
             <div class="theme-option theme-forest" data-theme="forest">
-                <div class="theme-icon-small">${getIcon('themeForest')}</div>
+                <div class="theme-icon-small" id="themeForestIcon"></div>
             </div>
             <div class="theme-option theme-winter" data-theme="winter">
-                <div class="theme-icon-small">${getIcon('themeWinter')}</div>
+                <div class="theme-icon-small" id="themeWinterIcon"></div>
             </div>
             <div class="theme-option theme-starry" data-theme="starry">
-                <div class="theme-icon-small">${getIcon('themeStarry')}</div>
+                <div class="theme-icon-small" id="themeStarryIcon"></div>
             </div>
             <div class="theme-option theme-candy" data-theme="candy">
-                <div class="theme-icon-small">${getIcon('themeCandy')}</div>
+                <div class="theme-icon-small" id="themeCandyIcon"></div>
             </div>
             <div class="theme-option theme-desert" data-theme="desert">
-                <div class="theme-icon-small">${getIcon('themeDesert')}</div>
+                <div class="theme-icon-small" id="themeDesertIcon"></div>
             </div>
             <div class="theme-option theme-arcade" data-theme="arcade">
-                <div class="theme-icon-small">${getIcon('themeArcade')}</div>
+                <div class="theme-icon-small" id="themeArcadeIcon"></div>
             </div>
             <div class="theme-option theme-autumn" data-theme="autumn">
-                <div class="theme-icon-small">${getIcon('themeAutumn')}</div>
+                <div class="theme-icon-small" id="themeAutumnIcon"></div>
             </div>
         </div>
     </div>
@@ -50,36 +51,36 @@
     <!-- Admin Controls -->
     <div class="admin-controls" id="adminControls">
         <button class="admin-btn" id="adminToggleBtn">
-            <div class="icon-small">${getIcon('settings')}</div>
+            <div class="icon-small" id="adminSettingsIcon"></div>
             Admin Controls
         </button>
         <div class="admin-panel" id="adminPanel">
             <div class="admin-section">
                 <h3>User Management</h3>
                 <button class="control-btn" id="kickUserBtn">
-                    <div class="icon-small">${getIcon('kick')}</div>
+                    <div class="icon-small" id="kickIcon"></div>
                     Kick User
                 </button>
                 <button class="control-btn" id="grantAdminBtn">
-                    <div class="icon-small">${getIcon('grantAdmin')}</div>
+                    <div class="icon-small" id="grantAdminIcon"></div>
                     Grant Admin
                 </button>
                 <button class="control-btn" id="revokeAdminBtn">
-                    <div class="icon-small">${getIcon('revokeAdmin')}</div>
+                    <div class="icon-small" id="revokeAdminIcon"></div>
                     Revoke Admin
                 </button>
             </div>
             <div class="admin-section">
                 <h3>Announcements</h3>
                 <button class="control-btn" id="announceBtn">
-                    <div class="icon-small">${getIcon('announce')}</div>
+                    <div class="icon-small" id="announceIcon"></div>
                     Send Announcement
                 </button>
             </div>
             <div class="admin-section">
                 <h3>Chat Management</h3>
                 <button class="control-btn" id="clearChatBtn">
-                    <div class="icon-small">${getIcon('delete')}</div>
+                    <div class="icon-small" id="clearChatIcon"></div>
                     Clear Chat
                 </button>
             </div>
@@ -88,13 +89,13 @@
 
     <!-- Notification -->
     <div class="notification" id="notification">
-        <div class="notification-icon">${getIcon('notification')}</div>
+        <div class="notification-icon" id="notificationBellIcon"></div>
         <div class="notification-content">
             <div class="notification-title" id="notificationTitle"></div>
             <div class="notification-message" id="notificationMessage"></div>
         </div>
         <button class="notification-close" id="notificationClose">
-            <div class="icon-small">${getIcon('close')}</div>
+            <div class="icon-small" id="notificationCloseIcon"></div>
         </button>
     </div>
 
@@ -102,7 +103,7 @@
     <div class="image-preview" id="imagePreview">
         <img class="preview-image" id="previewImage" src="" alt="Preview">
         <button class="preview-close" id="previewClose">
-            <div class="icon-small">${getIcon('close')}</div>
+            <div class="icon-small" id="previewCloseIcon"></div>
         </button>
     </div>
 
@@ -112,7 +113,7 @@
             <div class="modal-header">
                 <h2 class="modal-title">Send Announcement</h2>
                 <button class="modal-close" id="announcementModalClose">
-                    <div class="icon-small">${getIcon('close')}</div>
+                    <div class="icon-small" id="announcementModalCloseIcon"></div>
                 </button>
             </div>
             <textarea 
@@ -121,7 +122,7 @@
                 placeholder="Enter announcement message..."
                 rows="4"></textarea>
             <button class="send-btn mt-4" id="sendAnnouncementBtn">
-                <div class="send-btn-icon">${getIcon('send')}</div>
+                <div class="send-btn-icon" id="sendAnnouncementIcon"></div>
                 Send Announcement
             </button>
         </div>
@@ -133,7 +134,7 @@
             <div class="modal-header">
                 <h2 class="modal-title">Kick User</h2>
                 <button class="modal-close" id="kickUserModalClose">
-                    <div class="icon-small">${getIcon('close')}</div>
+                    <div class="icon-small" id="kickUserModalCloseIcon"></div>
                 </button>
             </div>
             <div class="mb-4">
@@ -145,7 +146,7 @@
                     placeholder="Enter username">
             </div>
             <button class="send-btn" id="confirmKickBtn">
-                <div class="send-btn-icon">${getIcon('kick')}</div>
+                <div class="send-btn-icon" id="confirmKickIcon"></div>
                 Kick User
             </button>
         </div>
@@ -157,7 +158,7 @@
             <div class="modal-header">
                 <h2 class="modal-title">Grant Admin</h2>
                 <button class="modal-close" id="grantAdminModalClose">
-                    <div class="icon-small">${getIcon('close')}</div>
+                    <div class="icon-small" id="grantAdminModalCloseIcon"></div>
                 </button>
             </div>
             <div class="mb-4">
@@ -169,7 +170,7 @@
                     placeholder="Enter username">
             </div>
             <button class="send-btn" id="confirmGrantAdminBtn">
-                <div class="send-btn-icon">${getIcon('grantAdmin')}</div>
+                <div class="send-btn-icon" id="confirmGrantAdminIcon"></div>
                 Grant Admin
             </button>
         </div>
@@ -181,7 +182,7 @@
             <div class="modal-header">
                 <h2 class="modal-title">Revoke Admin</h2>
                 <button class="modal-close" id="revokeAdminModalClose">
-                    <div class="icon-small">${getIcon('close')}</div>
+                    <div class="icon-small" id="revokeAdminModalCloseIcon"></div>
                 </button>
             </div>
             <div class="mb-4">
@@ -193,7 +194,7 @@
                     placeholder="Enter username">
             </div>
             <button class="send-btn" id="confirmRevokeAdminBtn">
-                <div class="send-btn-icon">${getIcon('revokeAdmin')}</div>
+                <div class="send-btn-icon" id="confirmRevokeAdminIcon"></div>
                 Revoke Admin
             </button>
         </div>
@@ -205,7 +206,7 @@
             <div class="modal-header">
                 <h2 class="modal-title">Clear Chat</h2>
                 <button class="modal-close" id="clearChatModalClose">
-                    <div class="icon-small">${getIcon('close')}</div>
+                    <div class="icon-small" id="clearChatModalCloseIcon"></div>
                 </button>
             </div>
             <div class="mb-4">
@@ -214,11 +215,11 @@
             </div>
             <div class="flex gap-3">
                 <button class="send-btn flex-1" id="confirmClearChatBtn">
-                    <div class="send-btn-icon">${getIcon('delete')}</div>
+                    <div class="send-btn-icon" id="confirmClearChatIcon"></div>
                     Clear Chat
                 </button>
                 <button class="send-btn flex-1" id="cancelClearChatBtn" style="background: var(--danger-color);">
-                    <div class="send-btn-icon">${getIcon('close')}</div>
+                    <div class="send-btn-icon" id="cancelClearChatIcon"></div>
                     Cancel
                 </button>
             </div>
@@ -231,11 +232,11 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <div class="icon-small">${getIcon('publicChat')}</div>
+                    <div class="icon-small" id="logoIcon"></div>
                     NiamChat
                 </div>
                 <button class="input-btn" id="menuToggleBtn">
-                    <div class="input-btn-icon">${getIcon('menu')}</div>
+                    <div class="input-btn-icon" id="menuToggleIcon"></div>
                 </button>
             </div>
 
@@ -247,7 +248,7 @@
                 <div class="user-details">
                     <div class="username">
                         <span id="displayUsername">User</span>
-                        <div class="icon-small" id="userRoleBadge">${getIcon('user')}</div>
+                        <div class="icon-small" id="userRoleBadge"></div>
                     </div>
                     <div class="user-role" id="userRoleText">User</div>
                 </div>
@@ -255,12 +256,12 @@
 
             <div class="chat-rooms">
                 <div class="room-item active" data-room="public" id="publicChatBtn">
-                    <div class="room-icon">${getIcon('publicChat')}</div>
+                    <div class="room-icon" id="publicChatIcon"></div>
                     <div class="room-name">Public Chat</div>
                     <div class="room-badge" id="publicBadge">0</div>
                 </div>
                 <div class="room-item" data-room="admin" id="adminChatBtn">
-                    <div class="room-icon">${getIcon('adminChat')}</div>
+                    <div class="room-icon" id="adminChatIcon"></div>
                     <div class="room-name">Admin Chat</div>
                     <div class="room-badge" id="adminBadge">0</div>
                 </div>
@@ -275,11 +276,11 @@
 
             <div class="sidebar-footer">
                 <button class="sidebar-btn" id="logoutBtn">
-                    <div class="sidebar-btn-icon">${getIcon('logout')}</div>
+                    <div class="sidebar-btn-icon" id="logoutIcon"></div>
                     Logout
                 </button>
                 <button class="sidebar-btn" id="reloadBtn">
-                    <div class="sidebar-btn-icon">${getIcon('reload')}</div>
+                    <div class="sidebar-btn-icon" id="reloadIcon"></div>
                     Reload
                 </button>
             </div>
@@ -289,16 +290,16 @@
         <div class="main-chat">
             <div class="chat-header">
                 <div class="chat-title">
-                    <div class="icon-small" id="currentChatIcon">${getIcon('publicChat')}</div>
+                    <div class="icon-small" id="currentChatIcon"></div>
                     <span id="currentChatTitle">Public Chat</span>
                 </div>
                 <div class="chat-actions">
                     <button class="action-btn" id="toggleSidebarBtn">
-                        <div class="input-btn-icon">${getIcon('menu')}</div>
+                        <div class="input-btn-icon" id="toggleSidebarIcon"></div>
                         Toggle Sidebar
                     </button>
                     <button class="action-btn" id="markReadBtn">
-                        <div class="input-btn-icon">${getIcon('checkmark')}</div>
+                        <div class="input-btn-icon" id="markReadIcon"></div>
                         Mark Read
                     </button>
                 </div>
@@ -307,7 +308,7 @@
             <div class="messages-container" id="messagesContainer">
                 <!-- Messages will be inserted here -->
                 <div class="empty-state">
-                    <div class="empty-icon">${getIcon('publicChat')}</div>
+                    <div class="empty-icon" id="emptyStateIcon"></div>
                     <h3>No messages yet</h3>
                     <p class="text-secondary">Be the first to send a message!</p>
                 </div>
@@ -325,10 +326,10 @@
             <div class="message-input-container">
                 <div class="input-actions">
                     <button class="input-btn" id="attachImageBtn" title="Attach Image">
-                        <div class="input-btn-icon">${getIcon('attach')}</div>
+                        <div class="input-btn-icon" id="attachImageIcon"></div>
                     </button>
                     <button class="input-btn" id="emojiToggleBtn" title="Emojis Disabled" disabled>
-                        <div class="input-btn-icon">${getIcon('close')}</div>
+                        <div class="input-btn-icon" id="emojiToggleIcon"></div>
                     </button>
                 </div>
                 <div class="input-area">
@@ -338,7 +339,7 @@
                         placeholder="Type your message here (emojis disabled)..."
                         rows="2"></textarea>
                     <button class="send-btn" id="sendMessageBtn">
-                        <div class="send-btn-icon">${getIcon('send')}</div>
+                        <div class="send-btn-icon" id="sendMessageIcon"></div>
                         Send
                     </button>
                 </div>
@@ -362,20 +363,97 @@
     <script src="js/announcements.js"></script>
 
     <script>
-        // Replace icon placeholders with actual icons
-        document.addEventListener('DOMContentLoaded', function() {
-            // Replace all icon placeholders with actual icons
-            const iconElements = document.querySelectorAll('.icon-small, .input-btn-icon, .send-btn-icon, .sidebar-btn-icon, .room-icon, .theme-icon, .theme-icon-small, .notification-icon');
-            
-            iconElements.forEach(element => {
-                const iconName = element.parentElement.classList[0]?.replace('icon-', '') || 
-                                element.classList[0]?.replace('icon-', '');
+        // Function to load all icons after DOM is ready
+        function loadAllIcons() {
+            // Icon mapping - match HTML IDs to icon names
+            const iconMap = {
+                // Theme picker icons
+                'themeIcon': 'themePicker',
+                'themeSeasideIcon': 'themeSeaside',
+                'themeCozyIcon': 'themeCozy',
+                'themeNeonIcon': 'themeNeon',
+                'themeForestIcon': 'themeForest',
+                'themeWinterIcon': 'themeWinter',
+                'themeStarryIcon': 'themeStarry',
+                'themeCandyIcon': 'themeCandy',
+                'themeDesertIcon': 'themeDesert',
+                'themeArcadeIcon': 'themeArcade',
+                'themeAutumnIcon': 'themeAutumn',
                 
-                if (iconName && window.getIcon && window.getIcon(iconName)) {
+                // Admin controls icons
+                'adminSettingsIcon': 'settings',
+                'kickIcon': 'kick',
+                'grantAdminIcon': 'grantAdmin',
+                'revokeAdminIcon': 'revokeAdmin',
+                'announceIcon': 'announce',
+                'clearChatIcon': 'delete',
+                
+                // Notification icons
+                'notificationBellIcon': 'notification',
+                'notificationCloseIcon': 'close',
+                
+                // Modal close icons
+                'announcementModalCloseIcon': 'close',
+                'kickUserModalCloseIcon': 'close',
+                'grantAdminModalCloseIcon': 'close',
+                'revokeAdminModalCloseIcon': 'close',
+                'clearChatModalCloseIcon': 'close',
+                'previewCloseIcon': 'close',
+                
+                // Modal action icons
+                'sendAnnouncementIcon': 'send',
+                'confirmKickIcon': 'kick',
+                'confirmGrantAdminIcon': 'grantAdmin',
+                'confirmRevokeAdminIcon': 'revokeAdmin',
+                'confirmClearChatIcon': 'delete',
+                'cancelClearChatIcon': 'close',
+                
+                // Sidebar icons
+                'logoIcon': 'publicChat',
+                'menuToggleIcon': 'menu',
+                'publicChatIcon': 'publicChat',
+                'adminChatIcon': 'adminChat',
+                'logoutIcon': 'logout',
+                'reloadIcon': 'reload',
+                
+                // Chat header icons
+                'currentChatIcon': 'publicChat',
+                'toggleSidebarIcon': 'menu',
+                'markReadIcon': 'checkmark',
+                
+                // Empty state icon
+                'emptyStateIcon': 'publicChat',
+                
+                // Message input icons
+                'attachImageIcon': 'attach',
+                'emojiToggleIcon': 'close',
+                'sendMessageIcon': 'send'
+            };
+            
+            // Load each icon
+            Object.keys(iconMap).forEach(elementId => {
+                const element = document.getElementById(elementId);
+                const iconName = iconMap[elementId];
+                
+                if (element && window.getIcon && window.getIcon(iconName)) {
                     element.innerHTML = window.getIcon(iconName);
+                } else if (element) {
+                    console.warn(`Could not load icon: ${iconName} for element: ${elementId}`);
                 }
             });
-        });
+            
+            // Special handling for user role badge (will be set by auth.js)
+            console.log('All icons loaded successfully');
+        }
+        
+        // Load icons when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadAllIcons);
+        
+        // Also load icons when window loads (fallback)
+        window.addEventListener('load', loadAllIcons);
+        
+        // Load icons after a short delay (in case icons.js loads slowly)
+        setTimeout(loadAllIcons, 1000);
     </script>
 </body>
 </html>
