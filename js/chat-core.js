@@ -657,6 +657,16 @@ class ChatCore {
             this.showError('Message too long (max 1000 characters).');
             return;
         }
+
+         const badWords = ['fuck', 'shit', 'bitch', 'asshole', 'damn', 'hell', 'dick', 'pussy', 'cock', 'cunt', 'nigger', 'nigga', 'whore', 'slut'];
+    const containsBadWord = badWords.some(word => 
+        text.toLowerCase().includes(word.toLowerCase())
+    );
+    
+    if (containsBadWord) {
+        this.showError('Please keep the chat clean - no profanity allowed.');
+        return;
+    }
         
         if (text || this.uploading) {
             this.sendMessage(text);
