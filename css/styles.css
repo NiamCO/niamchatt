@@ -1387,3 +1387,201 @@ h1, h2, h3, h4 {
     --admin-gradient: linear-gradient(135deg, #ea580c, #c2410c);
     --user-gradient: linear-gradient(135deg, #f97316, #ea580c);
 }
+
+/* Owner Messages - INSANELY GOOD POPPY but READABLE */
+.message.owner {
+    max-width: 75%;
+    background: linear-gradient(135deg, 
+        rgba(251, 191, 36, 0.15), 
+        rgba(245, 158, 11, 0.15), 
+        rgba(220, 38, 38, 0.15));
+    border: 3px solid;
+    border-image: linear-gradient(135deg, #fbbf24, #f59e0b, #dc2626) 1;
+    animation: ownerMessagePop 0.5s ease;
+    box-shadow: 
+        0 10px 25px -5px rgba(251, 191, 36, 0.3),
+        0 0 20px rgba(245, 158, 11, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 1;
+    margin: 15px 0;
+    transform-origin: left center;
+}
+
+@keyframes ownerMessagePop {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+        filter: blur(2px);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+.message.owner::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #dc2626);
+    z-index: -1;
+    border-radius: var(--border-radius);
+    opacity: 0.15;
+    filter: blur(8px);
+}
+
+.message.owner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.8), 
+        rgba(255, 255, 255, 0.9));
+    z-index: -1;
+    border-radius: calc(var(--border-radius) - 3px);
+    mix-blend-mode: overlay;
+}
+
+/* Make sure text is readable in owner messages */
+.message.owner .message-content {
+    color: var(--text-color);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.message.owner .message-username {
+    color: #92400e;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(251, 191, 36, 0.3);
+}
+
+.message.owner .message-time {
+    color: #b45309;
+    font-weight: 500;
+}
+
+/* Owner badge styling - FIXED to be visible */
+.role-badge.owner {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #dc2626);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-left: 8px;
+    animation: ownerBadgePulse 2s infinite;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes ownerBadgePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(251, 191, 36, 0.6);
+    }
+}
+
+.role-badge.owner::before {
+    content: '✨';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Hover effect for owner messages */
+.message.owner:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 
+        0 15px 30px -5px rgba(251, 191, 36, 0.4),
+        0 0 25px rgba(245, 158, 11, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message.owner:not(:hover) {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* FIX: Ensure all messages have proper minimum height and padding */
+.message {
+    min-height: 60px;
+    padding: 16px 18px !important;
+    margin: 12px 0;
+    backdrop-filter: none !important;
+}
+
+/* Fix for message content line height */
+.message-content {
+    line-height: 1.5 !important;
+    font-size: 1rem !important;
+    min-height: 24px;
+    padding: 2px 0;
+}
+
+/* Fix for owner message specifically */
+.message.owner .message-content {
+    line-height: 1.5 !important;
+    font-size: 1.05rem !important;
+    min-height: 26px;
+    padding: 3px 0;
+}
+
+/* Ensure text is always visible */
+.message * {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fix any transparency issues */
+.message.owner {
+    opacity: 1 !important;
+}
+
+/* Make sure background colors are solid enough */
+.message.owner {
+    background: linear-gradient(135deg, 
+        rgba(251, 191, 36, 0.12), 
+        rgba(245, 158, 11, 0.12), 
+        rgba(220, 38, 38, 0.12)),
+        var(--surface-color) !important;
+}
+
+/* Fix for multiple owner messages stacking */
+.messages-container {
+    gap: 8px !important;
+}
+
+.message + .message.owner,
+.message.owner + .message {
+    margin-top: 15px !important;
+}
