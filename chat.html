@@ -265,11 +265,11 @@
                     <div class="room-name">Admin Chat</div>
                     <div class="room-badge" id="adminBadge">0</div>
                 </div>
-                <a href="https://niamco.github.io/private-chat" target="_blank" class="room-item" id="privateChatBtn">
-                    <div class="room-icon" id="privateChatIcon"></div>
-                    <div class="room-name">Private Chat (NOT WORKING RN)</div>
-                    <div class="room-badge" id="privateBadge">↗</div>
-                </a>
+                   <div class="room-item" id="privateChatBtn">
+                     <div class="room-icon" id="privateChatIcon"></div>
+                     <div class="room-name">Private Chat</div>
+                     <div class="room-badge" id="privateBadge">↗</div>
+                </div>
             </div>
 
             <div class="online-users">
@@ -462,5 +462,23 @@
         // Load icons after a short delay (in case icons.js loads slowly)
         setTimeout(loadAllIcons, 1000);
     </script>
+    <script>
+    // Add click handler for private chat button
+    document.addEventListener('DOMContentLoaded', function() {
+        const privateChatBtn = document.getElementById('privateChatBtn');
+        
+        if (privateChatBtn) {
+            privateChatBtn.addEventListener('click', function() {
+                // Open private chat in new tab
+                window.open('https://niamco.github.io/private-chat', '_blank');
+            });
+            
+            // Remove link styling
+            privateChatBtn.style.textDecoration = 'none';
+            privateChatBtn.style.color = 'inherit';
+            privateChatBtn.style.cursor = 'pointer';
+        }
+    });
+</script>
 </body>
 </html>
